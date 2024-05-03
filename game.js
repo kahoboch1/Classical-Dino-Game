@@ -17,6 +17,7 @@ isPlaying = true;
 
 // Tilføj eventlistener til at lytte efter mellemrumstasten for at hoppe
 document.addEventListener('keydown', function(event) {
+    console.log(event.code); // Tilføj denne linje for at kontrollere, om mellemrumstasten bliver fanget korrekt
     if (event.code === 'Space' && !dino.jumping) {
         dino.jumping = true;
         jump();
