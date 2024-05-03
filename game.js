@@ -57,19 +57,23 @@ function fall() {
     }, 20);
 }
 
+let lastBeat = -1; // For at holde styr på sidste beat nummer vi hoppede på
+
 function update() {
-// Tilpas dette til din musik
     let currentTime = music.currentTime; // Aktuel tid i musikken
-    let bpm = 140; // Juster denne værdi efter behov (BPM for Für Elise)
+    let bpm = 120; // BPM for Für Elise
     let beatDuration = 60 / bpm; // Varighed af et beat i sekunder
     let beatNumber = Math.floor(currentTime / beatDuration); // Nummer af aktuelle beat
 
-    // Definer her, hvilke beats dinoen skal hoppe på, f.eks. hver 4. beat:
-    if (beatNumber % 4 === 0 && !dino.jumping) {
-        dino.jumping = true;
-        jump();
+    if (beatNumber !== lastBeat) { // Kun tjekke for ny beat
+        if (beatNumber % 4 === 0 && !dino.jumping) {
+            dino.jumping = true;
+            jump();
+            lastBeat = beatNumber; // Opdater sidste beat nummer
+        }
     }
 }
+
 
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
